@@ -1,0 +1,8 @@
+Build.PL
+lib/Mockery.pm
+t/basic.t
+t/lib/Mockery/Test/Basic.pm
+lib/Mockery/Expectation.pm
+lib/Mockery/Object.pm
+lib/Mockery/Recorder.pm
+MANIFEST

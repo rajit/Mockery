@@ -1,0 +1,19 @@
+Mockery - a mock object framework for test-driven development in perl.
+
+This code came about out of some frustration with the existing mocking systems
+available in perl.  As easy as it is to play around with classes dynamically in
+perl, creating mocks is quite a specialised task that, as witnessed by examples
+in smalltalk and Java, benefits greatly from a suitably specialised tool.
+
+This module uses the Module::Build system, so to build, test and install use the
+following commands:
+
+Build:
+    perl Build.PL
+    ./Build
+
+Test:
+    ./Build test
+
+Install:
+    ./Build install # probably needs sudo/root permissions

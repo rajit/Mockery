@@ -5,7 +5,6 @@ use warnings;
 
 use base qw(Test::Unit::TestCase);
 use Mockery;
-use Data::Dumper;
 
 sub set_up {
     my ($self) = @_;

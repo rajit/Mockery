@@ -1,8 +1,11 @@
 Build.PL
 lib/Mockery.pm
-t/basic.t
+t/tests.t
 t/lib/Mockery/Test/Basic.pm
+t/lib/Mockery/Test/Object.pm
+t/lib/Mockery/Test/Suite.pm
 lib/Mockery/Expectation.pm
 lib/Mockery/Object.pm
 lib/Mockery/Recorder.pm
 MANIFEST
+README

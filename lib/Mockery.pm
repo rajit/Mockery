@@ -18,6 +18,12 @@ Mockery - A mock framework for OO testing.
       $date->time;
   };
 
+  package ObjectToTest;
+
+  sub method_to_test {
+      $self->{date}->time;
+  }
+
 =cut
 
 our $VERSION = '0.1';

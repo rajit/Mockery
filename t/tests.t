@@ -8,4 +8,4 @@ use Test::Unit::HarnessUnit;
 use lib qw(t/lib);
 
 my $r = Test::Unit::HarnessUnit->new;
-$r->start('Mockery::Test::Basic');
+$r->start('Mockery::Test::Suite');

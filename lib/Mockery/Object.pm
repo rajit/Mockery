@@ -2,7 +2,6 @@ package Mockery::Object;
 
 use Any::Moose;
 use Class::MOP;
-use Mockery::Recorder;
 
 has ___recorder___ => (
     required => 1,

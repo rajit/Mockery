@@ -8,6 +8,8 @@ use Mockery;
 
 sub set_up {
     my ($self) = @_;
+    $self->{obj_name} = 'Testing::Object';
+    $self->{mock} = Mockery->create($self->{obj_name});
 }
 
 sub tear_down {
@@ -16,91 +18,84 @@ sub tear_down {
 
 sub test_constructor {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    $self->assert($mock->isa('Testing::Object'), 'Mockery->create produces a mocked object of the correct isa');
-    $self->assert(ref($mock) eq 'Testing::Object', 'Mockery->create produces mocked object of the correct ref');
+    $self->assert($self->{mock}->isa($self->{obj_name}), 'Mockery->create produces a mocked object of the correct isa');
+    $self->assert(ref($self->{mock}) eq $self->{obj_name}, 'Mockery->create produces mocked object of the correct ref');
 }
 
 sub test_expect {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    my $test = MyTest->new($mock);
+    my $test = MyTest->new($self->{mock});
     mock {
         $test->test;
     } expect {
-        $mock->mock;
+        $self->{mock}->mock;
     };
 }
 
 sub test_expect_not_called {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    my $test = MyTest->new($mock);
+    my $test = MyTest->new($self->{mock});
     $self->assert_exception_thrown(
         sub { mock {
             # no op
         } expect {
-            $mock->mock;
+            $self->{mock}->mock;
         } }, 'Exception::ExpectedMethodMissing'
     );
 }
 
 sub test_expect_in_order {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    my $test = MyTest->new($mock);
+    my $test = MyTest->new($self->{mock});
     mock {
         $test->in_order;
     } expect {
-        $mock->one;
-        $mock->two;
+        $self->{mock}->one;
+        $self->{mock}->two;
     };
 }
 
 sub test_expect_exception_for_out_of_order {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    my $test = MyTest->new($mock);
+    my $test = MyTest->new($self->{mock});
     $self->assert_exception_thrown(
         sub { mock {
             $test->in_order;
         } expect {
-            $mock->two;
-            $mock->one;
+            $self->{mock}->two;
+            $self->{mock}->one;
         } }, 'Exception::UnexpectedMethod'
     );
 }
 
 sub test_expect_many_calls_in_order {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    my $test = MyTest->new($mock);
+    my $test = MyTest->new($self->{mock});
     mock {
         $test->many_calls;
     } expect {
-        $mock->one;
-        $mock->two;
-        $mock->two;
-        $mock->one;
-        $mock->two;
-        $mock->one;
+        $self->{mock}->one;
+        $self->{mock}->two;
+        $self->{mock}->two;
+        $self->{mock}->one;
+        $self->{mock}->two;
+        $self->{mock}->one;
     };
 }
 
 sub test_expect_many_calls_out_of_order {
     my ($self) = @_;
-    my $mock = Mockery->create('Testing::Object');
-    my $test = MyTest->new($mock);
+    my $test = MyTest->new($self->{mock});
     $self->assert_exception_thrown(
         sub { mock {
             $test->many_calls;
         } expect {
-            $mock->one;
-            $mock->two;
-            $mock->two;
-            $mock->one;
-            $mock->one;
-            $mock->two;
+            $self->{mock}->one;
+            $self->{mock}->two;
+            $self->{mock}->two;
+            $self->{mock}->one;
+            $self->{mock}->one;
+            $self->{mock}->two;
         } }, 'Exception::UnexpectedMethod'
     );
 }

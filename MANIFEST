@@ -4,6 +4,8 @@ t/tests.t
 t/lib/Mockery/Test/Basic.pm
 t/lib/Mockery/Test/Object.pm
 t/lib/Mockery/Test/Suite.pm
+t/lib/Mockery/Test/Recorder.pm
+t/lib/Mockery/Test/Expectation.pm
 lib/Mockery/Expectation.pm
 lib/Mockery/Object.pm
 lib/Mockery/Recorder.pm

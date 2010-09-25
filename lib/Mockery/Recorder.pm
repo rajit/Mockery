@@ -20,6 +20,11 @@ has state => (
 
 my $SINGLETON;
 
+sub reset {
+    my ($self) = @_;
+    @{$self->expectations} = ();
+}
+
 sub singleton {
     my ($class) = @_;
     $SINGLETON = $class->new
@@ -63,11 +68,6 @@ sub finish {
         Exception::ExpectedMethodMissing->throw(
             error => "Expected method not called: $expectation->{package}\->$expectation->{method}\n");
     }
-}
-
-sub reset {
-    my ($self) = @_;
-    @{$self->expectations} = ();
 }
 
 sub set_record {

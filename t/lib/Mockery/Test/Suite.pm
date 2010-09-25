@@ -9,6 +9,7 @@ sub name { 'Mockery test suite' };
 sub include_tests { qw/
     Mockery::Test::Basic
     Mockery::Test::Object
-    Mockery::Test::Recorder/ };
+    Mockery::Test::Recorder
+    Mockery::Test::Expectation/ };
 
 1;
